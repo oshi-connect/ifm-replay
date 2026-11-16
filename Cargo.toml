@@ -1,0 +1,19 @@
+[package]
+name = "ifm-replay"
+version = "0.1.0"
+edition = "2021"
+description = "Replays a recorded face animation as a live iFacialMocap stream"
+license = "MIT"
+
+[dependencies]
+gpui = "0.2.2"
+anyhow = "1.0"
+yaml-rust2 = "0.10"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+
+# Compile Metal shaders at launch, so a Mac build does not need Xcode's Metal toolchain.
+[target.'cfg(target_os = "macos")'.dependencies]
+gpui = { version = "0.2.2", features = ["runtime_shaders"] }
